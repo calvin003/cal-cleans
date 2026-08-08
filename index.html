@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cal Cleans® — Let Us Do the Cleaning!</title>
+<meta name="description" content="Professional residential & commercial cleaning in Pennsylvania. Call or text (669) 232-7006 for a free estimate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#E6E4DF;
+    --bg-cell:#DBD9D4;
+    --ink:#111110;
+    --ink-soft:#4c4b48;
+    --hair:rgba(17,17,16,.55);
+    --hair-soft:rgba(17,17,16,.22);
+    --pill-bg:rgba(240,239,235,.92);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',Helvetica,Arial,sans-serif;
+    background:#c9c7c2;
+    color:var(--ink);
+    font-size:18px;
+    line-height:1.5;
+    letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  .frame{
+    background:var(--bg);
+    min-height:100vh;
+    border:1px solid rgba(0,0,0,.35);
+    border-radius:14px;
+    margin:6px;
+    overflow:clip;
+    position:relative;
+  }
+  /* 960px centered content column — same as original */
+  .container{width:960px;max-width:calc(100% - 40px);margin:0 auto}
+
+  /* ============ intro ============ */
+  .intro{
+    position:fixed;inset:6px;z-index:100;background:var(--bg);border-radius:14px;
+    display:flex;align-items:center;
+    padding-left:6vw;
+    transition:opacity .7s ease, visibility .7s;
+  }
+  .intro h1{
+    font-size:clamp(90px,24vw,340px);
+    font-weight:600;letter-spacing:-.05em;line-height:1;
+    overflow:hidden;white-space:nowrap;
+  }
+  .intro h1 span{display:inline-block;transform:translateY(110%);animation:rise .8s cubic-bezier(.2,.6,.15,1) forwards}
+  @keyframes rise{to{transform:translateY(0)}}
+  body.ready .intro{opacity:0;visibility:hidden}
+
+  /* ============ header — centered nav with logo in the middle, CALL NOW right ============ */
+  header{
+    position:fixed;top:6px;left:6px;right:6px;z-index:60;
+    height:100px;
+    background:var(--bg);
+    border-bottom:1px solid var(--hair);
+    border-radius:14px 14px 0 0;
+  }
+  .nav-center{
+    position:absolute;left:50%;top:0;transform:translateX(-50%);
+    height:100%;
+    display:flex;align-items:center;gap:34px;
+  }
+  .nav-link{
+    font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    padding-bottom:3px;border-bottom:2px solid transparent;
+  }
+  .nav-link:hover,.nav-link.active{border-bottom-color:var(--ink)}
+  .wordmark{
+    text-align:center;font-weight:600;font-size:19px;letter-spacing:-.01em;
+    line-height:1.1;padding:0 8px;
+  }
+  .wordmark sup{font-size:9px;vertical-align:super}
+  .wordmark small{
+    display:block;font-size:9px;font-weight:500;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:3px;
+  }
+  .callnow{
+    position:absolute;right:40px;top:50%;transform:translateY(-50%);
+    display:flex;align-items:center;gap:10px;
+    font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .callnow:hover{opacity:.6}
+
+  /* ============ 1. hero — centered portrait image, heading + sub BELOW ============ */
+  .hero{padding-top:124px;text-align:center;border-bottom:none}
+  .hero .portrait{
+    width:362px;max-width:80vw;height:543px;
+    margin:0 auto;
+    overflow:hidden;background:var(--bg-cell);
+  }
+  .hero .portrait img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.02)}
+  .hero h2{
+    margin-top:10px;
+    font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1.15;
+  }
+  .hero p{
+    margin:12px auto 0;max-width:640px;
+    font-size:18px;font-weight:400;color:var(--ink-soft);
+  }
+
+  /* ============ 2. keep it clean — 960×406 photo band, left text ============ */
+  .keep{margin:69px auto 0;border-bottom:none}
+  .keep .band{
+    width:960px;max-width:calc(100% - 40px);height:406px;margin:0 auto;
+    position:relative;overflow:hidden;
+  }
+  .keep .band img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:grayscale(1) contrast(1.04);
+  }
+  .keep .band::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(17,17,16,.62) 0%, rgba(17,17,16,.28) 55%, rgba(17,17,16,.08) 100%);
+  }
+  .keep .inner{
+    position:absolute;inset:0;z-index:2;
+    padding:49px 40px;
+    color:var(--bg);
+  }
+  .keep h2{font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1.15}
+  .keep p{margin-top:8px;max-width:430px;font-size:18px;font-weight:400;line-height:1.55}
+  .keep .btn-outline{
+    display:flex;align-items:center;justify-content:center;
+    width:280px;height:55px;margin-top:16px;
+    border:2px solid var(--bg);
+    font-size:18px;font-weight:500;color:var(--bg);
+    transition:background .2s,color .2s;
+  }
+  .keep .btn-outline:hover{background:var(--bg);color:var(--ink)}
+
+  /* ============ 3. our services — centered head + 4 bordered boxes 215×285 ============ */
+  .services{padding:153px 0 0;text-align:center;border-bottom:none}
+  .services h2{font-size:50px;font-weight:600;letter-spacing:-.04em}
+  .services .intro-p{
+    margin:12px auto 0;max-width:740px;
+    font-size:18px;font-weight:400;color:var(--ink-soft);
+  }
+  .s-row{
+    display:flex;justify-content:center;gap:20px;
+    margin-top:58px;flex-wrap:wrap;
+  }
+  .s-box{
+    width:215px;height:285px;
+    border:1px solid var(--hair);
+    display:flex;flex-direction:column;align-items:center;
+    padding:52px 18px 0;
+    transition:background .2s;
+  }
+  .s-box:hover{background:rgba(17,17,16,.04)}
+  .s-box .icon{width:72px;height:72px;display:grid;place-items:center}
+  .s-box .icon svg{width:64px;height:64px;stroke-width:1.1}
+  .s-box h3{
+    margin-top:42px;
+    font-size:18px;font-weight:500;letter-spacing:-.01em;line-height:1.3;
+  }
+
+  /* ============ 4. happy clients — 3 cols of 280px, centered quotes ============ */
+  .clients{padding:161px 0 0;text-align:center;border-bottom:none}
+  .clients h2{font-size:50px;font-weight:600;letter-spacing:-.04em}
+  .t-row{
+    display:flex;justify-content:center;gap:45px;
+    margin-top:108px;flex-wrap:wrap;
+  }
+  .t-col{width:280px}
+  .t-col blockquote{
+    font-size:18px;font-weight:400;font-style:italic;
+    color:var(--ink-soft);line-height:1.5;
+  }
+  .t-col .name{
+    display:block;margin-top:24px;
+    font-size:18px;font-weight:700;letter-spacing:-.01em;
+  }
+
+  /* ============ 5. book now — centered heading + solid button ============ */
+  .booknow{padding:200px 0 0;text-align:center;border-bottom:none}
+  .booknow h2{font-size:50px;font-weight:600;letter-spacing:-.04em}
+  .booknow p{
+    margin:12px auto 0;max-width:780px;
+    font-size:18px;font-weight:400;color:var(--ink-soft);
+  }
+  .btn-solid{
+    display:flex;align-items:center;justify-content:center;
+    width:304px;height:56px;margin:24px auto 0;
+    background:var(--ink);color:var(--bg);
+    font-size:17px;font-weight:600;letter-spacing:-.01em;
+    transition:transform .15s;
+  }
+  .btn-solid:hover{transform:scale(1.03)}
+
+  /* ============ 6. form — 3-col fields 286×40, selects, wide notes ============ */
+  .formsec{padding:120px 0 0;border-bottom:none}
+  .f-grid{width:926px;max-width:calc(100% - 40px);margin:0 auto}
+  .f-row3{display:flex;justify-content:flex-start;gap:34px;flex-wrap:wrap}
+  .f-item{width:286px;max-width:100%}
+  .f-item label,.f-notes label{
+    display:block;font-size:15px;font-weight:500;color:var(--ink-soft);margin-bottom:5px;
+  }
+  .f-item input,.f-item select{
+    width:100%;height:40px;
+    background:var(--pill-bg);
+    border:1px solid var(--hair-soft);
+    padding:0 12px;
+    font-family:inherit;font-size:15px;color:var(--ink);outline:none;
+  }
+  .f-item input:focus,.f-item select:focus,.f-notes textarea:focus{border-color:var(--ink)}
+  .f-row3 + .f-row3{margin-top:32px;justify-content:flex-start}
+  .f-notes{margin-top:32px}
+  .f-notes textarea{
+    width:100%;height:75px;
+    background:var(--pill-bg);
+    border:1px solid var(--hair-soft);
+    padding:10px 12px;resize:vertical;
+    font-family:inherit;font-size:15px;color:var(--ink);outline:none;
+  }
+  .btn-send{
+    display:flex;align-items:center;justify-content:center;
+    width:286px;height:41px;margin:40px auto 0;
+    background:none;border:1px solid var(--ink);
+    font-family:inherit;font-size:17px;font-weight:500;color:var(--ink);
+    cursor:pointer;transition:background .2s,color .2s;
+  }
+  .btn-send:hover{background:var(--ink);color:var(--bg)}
+
+  /* ============ footer — logo | instagram | contact ============ */
+  footer{
+    margin-top:150px;
+    border-top:1px solid var(--hair);
+    padding:90px 0 110px;
+  }
+  .foot-grid{
+    width:960px;max-width:calc(100% - 40px);margin:0 auto;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:40px;
+  }
+  .foot-logo{font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1.1}
+  .foot-logo sup{font-size:10px}
+  .foot-logo small{
+    display:block;font-size:10px;font-weight:500;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:4px;
+  }
+  .foot-ig{padding-top:6px}
+  .foot-ig svg{width:26px;height:26px}
+  .foot-ig:hover{opacity:.6}
+  .foot-contact{text-align:left;min-width:220px}
+  .foot-contact .head{
+    font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .foot-contact a{display:block;font-size:18px;font-weight:400;line-height:1.6}
+  .foot-contact a:hover{opacity:.6}
+
+  /* ============ fixed BOOK NOW — 280×56, bottom-left 40/40 ============ */
+  .book-fixed{
+    position:fixed;left:40px;bottom:40px;z-index:55;
+    width:280px;height:56px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ink);color:var(--bg);
+    font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    transition:transform .15s;
+  }
+  .book-fixed:hover{transform:scale(1.03)}
+
+  /* ============ let's chat popup ============ */
+  .chat-ov{
+    position:fixed;inset:0;z-index:95;
+    background:rgba(17,17,16,.42);
+    display:grid;place-items:center;
+    opacity:0;visibility:hidden;transition:opacity .4s, visibility .4s;
+  }
+  .chat-ov.show{opacity:1;visibility:visible}
+  .chat-box{
+    position:relative;
+    background:var(--bg);
+    border:1px solid var(--hair);
+    border-radius:14px;
+    width:min(720px, calc(100vw - 48px));
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;
+    padding:44px 40px;
+    align-items:center;
+  }
+  .chat-box .x{
+    position:absolute;top:14px;right:18px;
+    background:none;border:none;cursor:pointer;color:var(--ink);
+    font-size:15px;font-weight:500;font-family:inherit;
+  }
+  .chat-box .x:hover{opacity:.55}
+  .chat-box .ph{
+    width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;
+    border:1px solid var(--hair-soft);
+    max-width:280px;margin:0 auto;
+  }
+  .chat-box .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
+  .chat-box h3{font-size:38px;font-weight:600;letter-spacing:-.035em}
+  .chat-box p{margin:12px 0 24px;font-size:16px;font-weight:400;color:var(--ink-soft);max-width:300px}
+  .chat-box .btns{display:flex;flex-direction:column;gap:10px;max-width:240px}
+  .chat-btn{
+    display:flex;align-items:center;justify-content:center;
+    height:50px;border:1px solid var(--ink);
+    font-size:16px;font-weight:500;
+    transition:background .2s,color .2s;
+  }
+  .chat-btn:hover,.chat-btn.dark{background:var(--ink);color:var(--bg)}
+  .chat-btn.dark:hover{opacity:.85}
+
+  /* ============ responsive ============ */
+  @media(max-width:1020px){
+    .nav-center{gap:18px}
+    .callnow .cn-label{display:none}
+  }
+  @media(max-width:820px){
+    header{height:72px}
+    .nav-link{display:none}
+    .hero{padding-top:96px}
+    .hero h2,.keep h2,.services h2,.clients h2,.booknow h2{font-size:36px}
+    .keep .band{height:auto;min-height:406px}
+    .keep .inner{position:relative;padding:40px 24px}
+    .keep .band img{position:absolute}
+    .s-row{gap:16px}
+    .t-row{gap:40px}
+    .services,.clients{padding-top:100px}
+    .booknow{padding-top:120px}
+    .f-row3{gap:20px}
+    .f-item{width:100%}
+    .foot-grid{flex-direction:column;gap:44px}
+    .book-fixed{left:20px;bottom:20px;width:220px;height:50px}
+    .chat-box{grid-template-columns:1fr;text-align:center;padding:36px 24px}
+    .chat-box .ph{max-width:170px}
+    .chat-box p,.chat-box .btns{margin-left:auto;margin-right:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- intro -->
+<div class="intro" aria-hidden="true">
+  <h1><span>Cal.</span></h1>
+</div>
+
+<div class="frame">
+
+  <!-- header: HOME SERVICES [logo] ABOUT CONTACT ·· CALL NOW -->
+  <header>
+    <nav class="nav-center">
+      <a class="nav-link active" href="#top">Home</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="wordmark" href="#top">Cal Cleans<sup>®</sup><small>Pennsylvania</small></a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <a class="callnow" href="tel:+16692327006">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span class="cn-label">Call Now</span>
+    </a>
+  </header>
+
+  <!-- 1. hero: centered 362×543 portrait, heading + sub below -->
+  <section class="hero" id="top">
+    <div class="portrait">
+      <img src="https://images.pexels.com/photos/9462157/pexels-photo-9462157.jpeg?auto=compress&cs=tinysrgb&w=800" alt="A professional cleaner wiping a wooden table">
+    </div>
+    <h2>Let Us Do the Cleaning!</h2>
+    <p>You deserve a clean space, and that's our speciality. Whether it's your home or your workspace, call or text us today for your free estimate.</p>
+  </section>
+
+  <!-- 2. keep it clean: 960×406 photo band -->
+  <section class="keep" id="about">
+    <div class="band">
+      <img loading="lazy" src="https://images.pexels.com/photos/3616735/pexels-photo-3616735.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cleaning supplies arranged on a surface">
+      <div class="inner">
+        <h2>Keep It Clean</h2>
+        <p>At Cal Cleans, we believe in creating spaces that shine. Our dedicated team is here to ensure your home or office is spotless and welcoming. Let us handle the mess while you enjoy a cleaner, healthier environment.</p>
+        <a class="btn-outline" href="#services">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. our services: heading, intro, 4 boxes 215×285 -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <p class="intro-p">We serve both residential and commercial clients, bringing cleanliness to every space we encounter. Our staff is reliable and hardworking — we promise excellent service, every time.</p>
+    <div class="s-row">
+      <div class="s-box">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h3v4"/><path d="M9.5 5H7l1 4h6.5"/><path d="M8 9l-2 4v8h9v-8l-1.5-4"/><path d="M6 15h9"/><circle cx="4.5" cy="5.5" r=".5"/><circle cx="5.5" cy="8" r=".5"/><circle cx="3.5" cy="10" r=".5"/></svg></span>
+        <h3>House Cleaning</h3>
+      </div>
+      <div class="s-box">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17h13a4 4 0 0 0 0-8H9a5 5 0 0 0-5 5v3z"/><path d="M4 17h16"/><circle cx="12" cy="13" r="1"/><path d="M19 6l1.5-1.5M21 9h2M20 12l1.5 1"/></svg></span>
+        <h3>Ironing</h3>
+      </div>
+      <div class="s-box">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l8 9-2 2-9-8 3-3z"/><path d="M14 12l3 3v6h-6v-6"/><circle cx="17.5" cy="19.5" r="1.5"/></svg></span>
+        <h3>Office Cleaning</h3>
+      </div>
+      <div class="s-box">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20a6 6 0 0 1 12 0"/><path d="M6 20h12"/><path d="M9 11a3 3 0 0 1 6 0v1H9v-1z"/><path d="M12 4v4"/><path d="M12 4a8 8 0 0 0-5 2M12 4a8 8 0 0 1 5 2"/></svg></span>
+        <h3>Post-Construction Cleaning</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. happy clients: 3 cols × 280px -->
+  <section class="clients" id="reviews">
+    <h2>Happy Clients!</h2>
+    <div class="t-row">
+      <div class="t-col">
+        <blockquote>"They were great! On time, and stayed until the job was done. They didn't dip out after 2-3 hours leaving things a mess. I also liked that they were thorough. Top to bottom, Lisa was phenomenal. Thanks again!! I was starting to give up on cleaning companies in Pennsylvania. 10/10, highly recommend."</blockquote>
+        <span class="name">Alison M.</span>
+      </div>
+      <div class="t-col">
+        <blockquote>"Between work, errands, and life, keeping up with deep cleaning isn't easy. That's why I booked Cal Cleans, and I'm SO glad I did. They transformed my space in just a few hours. If you're thinking about hiring a professional cleaning service, do yourself a favor and call Cal Cleans. You won't regret it!"</blockquote>
+        <span class="name">Edmond M.</span>
+      </div>
+      <div class="t-col">
+        <blockquote>"Life is busy, and keeping up with cleaning is tough. That's why I decided to try Cal Cleans, and I'm so glad I did! They made my home look brand new. If you've been thinking about hiring a professional cleaning service, this is your sign to do it!"</blockquote>
+        <span class="name">Colton B.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. book now -->
+  <section class="booknow" id="book">
+    <h2>Book Now</h2>
+    <p>We love to clean, and it shows. Tell us about your cleaning needs, and we'll send you a FREE estimate.</p>
+    <a class="btn-solid" href="sms:+16692327006">Click Here to Call or Text Now!</a>
+  </section>
+
+  <!-- 6. contact form -->
+  <section class="formsec" id="contact">
+    <form class="f-grid" onsubmit="return sendBooking(this)">
+      <div class="f-row3">
+        <div class="f-item"><label>Name</label><input name="Name" type="text" required></div>
+        <div class="f-item"><label>Email</label><input name="Email" type="email" required></div>
+        <div class="f-item"><label>Phone #</label><input name="Phone" type="tel" required></div>
+      </div>
+      <div class="f-row3">
+        <div class="f-item"><label>Type of Cleaning</label>
+          <select name="Type">
+            <option>Standard Cleaning</option>
+            <option>Deep Cleaning</option>
+          </select>
+        </div>
+        <div class="f-item"><label>Size of House</label>
+          <select name="Size">
+            <option>Up to 700 sq ft | 1 Bed | 1 Bath | $140</option>
+            <option>700-1,200 sq ft | 2 Beds | 1 Bath | $170</option>
+            <option>1,200-1,800 sq ft | 3 Beds | 2 Baths | $210</option>
+            <option>1,800-2,500 sq ft | 4 Beds | 2.5 Baths | $260</option>
+            <option>2,500-3,500 sq ft | 5 Beds | 3 Baths | $340</option>
+            <option>3,500+ sq ft | 5+ Beds | 4+ Baths | $450+ (Custom Quote)</option>
+          </select>
+        </div>
+      </div>
+      <div class="f-notes"><label>Notes:</label><textarea name="Notes"></textarea></div>
+      <button class="btn-send" type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- footer: logo | instagram | contact -->
+  <footer>
+    <div class="foot-grid">
+      <a class="foot-logo" href="#top">Cal Cleans<sup>®</sup><small>Pennsylvania</small></a>
+      <a class="foot-ig" href="https://instagram.com/gracecleaningaz" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+      </a>
+      <div class="foot-contact">
+        <div class="head">Contact</div>
+        <a href="tel:+16692327006">(669) 232-7006</a>
+        <a href="mailto:calcleans03@gmail.com">calcleans03@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- fixed book now (bottom-left, 280×56) -->
+  <a class="book-fixed" href="#contact">Book Now</a>
+
+  <!-- let's chat popup -->
+  <div class="chat-ov" id="chatOv">
+    <div class="chat-box">
+      <button class="x" id="chatClose" aria-label="Close">✕</button>
+      <div class="ph"><img loading="lazy" src="https://images.pexels.com/photos/9462101/pexels-photo-9462101.jpeg?auto=compress&cs=tinysrgb&w=600" alt="A woman cleaning a window with glass cleaner"></div>
+      <div>
+        <h3>Let's chat!</h3>
+        <p>Tell us when you'd like to schedule a meeting, and we'll be in touch shortly.</p>
+        <div class="btns">
+          <a class="chat-btn" href="tel:+16692327006">Call</a>
+          <a class="chat-btn dark" href="sms:+16692327006">Message</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  setTimeout(() => document.body.classList.add('ready'), 1600);
+
+  const chatOv = document.getElementById('chatOv');
+  setTimeout(() => chatOv.classList.add('show'), 3400);
+  document.getElementById('chatClose').onclick = () => chatOv.classList.remove('show');
+  chatOv.addEventListener('click', e => { if (e.target === chatOv) chatOv.classList.remove('show'); });
+
+  function sendBooking(f){
+    const body = "Name: " + f.Name.value + "\n" +
+      "Email: " + f.Email.value + "\n" +
+      "Phone: " + f.Phone.value + "\n" +
+      "Type of Cleaning: " + f.Type.value + "\n" +
+      "Size of House: " + f.Size.value + "\n" +
+      "Notes: " + f.Notes.value;
+    location.href = "mailto:calcleans03@gmail.com?subject=" +
+      encodeURIComponent("Free Estimate Request — " + f.Name.value) +
+      "&body=" + encodeURIComponent(body);
+    return false;
+  }
+</script>
+</body>
+</html>
