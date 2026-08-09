@@ -44,22 +44,6 @@
   /* 960px centered content column — same as original */
   .container{width:960px;max-width:calc(100% - 40px);margin:0 auto}
 
-  /* ============ intro ============ */
-  .intro{
-    position:fixed;inset:6px;z-index:100;background:var(--bg);border-radius:14px;
-    display:flex;align-items:center;
-    padding-left:6vw;
-    transition:opacity .7s ease, visibility .7s;
-  }
-  .intro h1{
-    font-size:clamp(90px,24vw,340px);
-    font-weight:600;letter-spacing:-.05em;line-height:1;
-    overflow:hidden;white-space:nowrap;
-  }
-  .intro h1 span{display:inline-block;transform:translateY(110%);animation:rise .8s cubic-bezier(.2,.6,.15,1) forwards}
-  @keyframes rise{to{transform:translateY(0)}}
-  body.ready .intro{opacity:0;visibility:hidden}
-
   /* ============ header — centered nav with logo in the middle, CALL NOW right ============ */
   header{
     position:fixed;top:6px;left:6px;right:6px;z-index:60;
@@ -343,11 +327,6 @@
 </head>
 <body>
 
-<!-- intro -->
-<div class="intro" aria-hidden="true">
-  <h1><span>Cal.</span></h1>
-</div>
-
 <div class="frame">
 
   <!-- header: HOME SERVICES [logo] ABOUT CONTACT ·· CALL NOW -->
@@ -504,8 +483,6 @@
 </div>
 
 <script>
-  setTimeout(() => document.body.classList.add('ready'), 1600);
-
   const chatOv = document.getElementById('chatOv');
   setTimeout(() => chatOv.classList.add('show'), 3400);
   document.getElementById('chatClose').onclick = () => chatOv.classList.remove('show');
