@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1099-NEC Form | Cal Cleans</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Courier New', monospace;
+    background: #f0f0f0;
+    color: #1a1a1a;
+  }
+
+  .no-print {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .no-print h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .no-print h1 span { color: #60a5fa; }
+
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: #3b82f6;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #2563eb; }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+  .form-container {
+    max-width: 850px;
+    margin: 24px auto;
+    padding: 0 16px 40px;
+  }
+
+  /* ---- IRS FORM REPLICA ---- */
+  .irs-form {
+    background: #fff;
+    border: 2px solid #000;
+    font-size: 11px;
+    line-height: 1.3;
+    position: relative;
+  }
+
+  .form-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: 2px solid #000;
+  }
+
+  .form-header-left {
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .form-header-left .form-code {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  .void-corrected {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .void-corrected label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .void-corrected input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+
+  .form-header-right {
+    border-left: 2px solid #000;
+    padding: 4px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-header-right .omb {
+    font-size: 9px;
+    color: #555;
+  }
+
+  /* ---- MAIN GRID ---- */
+  .form-body {
+    display: grid;
+    grid-template-columns: 53% 47%;
+  }
+
+  .left-col {
+    border-right: 2px solid #000;
+  }
+
+  /* ---- FIELD ROWS ---- */
+  .field-row {
+    border-bottom: 1px solid #000;
+    display: grid;
+    min-height: 38px;
+  }
+
+  .field-row.thick { border-bottom-width: 2px; }
+
+  .field-row.two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field-row.three-col {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .field-row.addr-apt {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .field-cell {
+    padding: 2px 6px 2px 6px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field-cell + .field-cell {
+    border-left: 1px solid #000;
+  }
+
+  .field-label {
+    font-size: 9px;
+    color: #555;
+    flex-shrink: 0;
+  }
+
+  .field-input {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    flex: 1;
+    padding: 1px 0;
+    color: #0033aa;
+    font-weight: 600;
+  }
+
+  .field-input::placeholder {
+    color: #ccc;
+    font-weight: 400;
+    font-size: 11px;
+  }
+
+  .field-input:focus {
+    background: #eff6ff;
+  }
+
+  /* ---- RIGHT COLUMN ---- */
+  .right-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-header {
+    border-bottom: 2px solid #000;
+    padding: 4px 8px;
+    text-align: right;
+    min-height: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .right-header .form-title {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+
+  .right-header .form-subtitle {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .right-header .form-rev {
+    font-size: 9px;
+    color: #555;
+  }
+
+  .calendar-year {
+    border-bottom: 1px solid #000;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 32px;
+  }
+
+  .calendar-year .field-label {
+    font-size: 10px;
+  }
+
+  .calendar-year .field-input {
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    border-bottom: 2px solid #000;
+  }
+
+  .box-row {
+    border-bottom: 1px solid #000;
+    padding: 2px 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 36px;
+  }
+
+  .box-row.thick { border-bottom-width: 2px; }
+
+  .box-label {
+    font-size: 9px;
+    color: #555;
+  }
+
+  .box-label b {
+    color: #000;
+    font-size: 10px;
+  }
+
+  .box-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .box-input-wrap .dollar {
+    font-size: 12px;
+    color: #555;
+  }
+
+  .box-input {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    color: #0033aa;
+    padding: 1px 0;
+  }
+
+  .box-input:focus { background: #eff6ff; }
+
+  .box-input::placeholder {
+    color: #ccc;
+    font-weight: 400;
+    font-size: 11px;
+  }
+
+  .box-row.checkbox-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    color: #555;
+  }
+
+  .box-row.checkbox-row input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+
+  .box-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid #000;
+    min-height: 36px;
+  }
+
+  .box-split .box-cell {
+    padding: 2px 6px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box-split .box-cell + .box-cell {
+    border-left: 1px solid #000;
+  }
+
+  .copy-label {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 900;
+    color: #333;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .copy-label small {
+    font-size: 10px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .right-side-label {
+    position: relative;
+  }
+
+  /* ---- FORM FOOTER ---- */
+  .form-footer {
+    border-top: 2px solid #000;
+    padding: 4px 8px;
+    font-size: 9px;
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+  }
+
+  /* ---- INFO CARDS (no-print) ---- */
+  .info-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    max-width: 850px;
+    margin: 0 auto 20px;
+    padding: 0 16px;
+  }
+
+  .info-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .info-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1e293b;
+  }
+
+  .info-card p, .info-card li {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+  }
+
+  .info-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-card li {
+    padding: 3px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .info-card li::before {
+    content: 'â';
+    position: absolute;
+    left: 0;
+    color: #94a3b8;
+  }
+
+  .filled-tag {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 4px;
+  }
+
+  .needs-tag {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 4px;
+  }
+
+  /* ---- PRINT ---- */
+  @media print {
+    .no-print, .info-section { display: none !important; }
+    body { background: #fff; }
+    .form-container { margin: 0; padding: 0; max-width: 100%; }
+    .irs-form { border-width: 1px; }
+    .field-input, .box-input { color: #000 !important; }
+    .field-input:focus, .box-input:focus { background: transparent !important; }
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 600px) {
+    .form-container { padding: 0 8px; }
+    .irs-form { font-size: 10px; }
+    .field-input { font-size: 11px; }
+    .box-input { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <h1><span>Cal Cleans</span> &mdash; 1099-NEC Form</h1>
+  <div class="toolbar">
+    <button class="btn btn-secondary" onclick="clearRecipient()">Clear Recipient</button>
+    <button class="btn btn-primary" onclick="window.print()">Print Form</button>
+  </div>
+</div>
+
+<div class="info-section no-print">
+  <div class="info-card">
+    <h3>What's pre-filled <span class="filled-tag">Done</span></h3>
+    <p>Payer name (Cal Cleans), city (Sacramento), and state (CA) are filled in. Everything else is editable right on the form below.</p>
+  </div>
+  <div class="info-card">
+    <h3>What you need to fill in <span class="needs-tag">You</span></h3>
+    <ul>
+      <li><b>Your info:</b> Street address, ZIP, phone, and your EIN or SSN (PAYER'S TIN)</li>
+      <li><b>Cleaner's info:</b> Their name, SSN/EIN, address</li>
+      <li><b>Payment:</b> Calendar year + Box 1a (total you paid them)</li>
+      <li><b>If applicable:</b> Box 4 (federal tax withheld), Boxes 5-7 (state tax)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="form-container">
+  <!-- ============ COPY B - FOR RECIPIENT ============ -->
+  <div class="irs-form">
+
+    <!-- HEADER -->
+    <div class="form-header">
+      <div class="form-header-left">
+        <div class="void-corrected">
+          <label><input type="checkbox"> CORRECTED (if checked)</label>
+        </div>
+      </div>
+      <div class="form-header-right">
+        <div class="omb">OMB No. 1545-0116</div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-body">
+
+      <!-- ---- LEFT COLUMN ---- -->
+      <div class="left-col">
+        <!-- PAYER'S name -->
+        <div class="field-row">
+          <div class="field-cell">
+            <span class="field-label">PAYER'S name</span>
+            <input class="field-input" type="text" value="Cal Cleans" placeholder="Business name">
+          </div>
+        </div>
+
+        <!-- Street / Room -->
+        <div class="field-row two-col">
+          <div class="field-cell">
+            <span class="field-label">Street address</span>
+            <input class="field-input" type="text" placeholder="123 Main St">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">Room or suite no.</span>
+            <input class="field-input" type="text" placeholder="">
+          </div>
+        </div>
+
+        <!-- City / Phone -->
+        <div class="field-row two-col">
+          <div class="field-cell">
+            <span class="field-label">City or town</span>
+            <input class="field-input" type="text" value="Sacramento" placeholder="City">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">Telephone number</span>
+            <input class="field-input" type="tel" placeholder="(916) 555-0000">
+          </div>
+        </div>
+
+        <!-- State / Country / ZIP -->
+        <div class="field-row three-col thick">
+          <div class="field-cell">
+            <span class="field-label">State or province</span>
+            <input class="field-input" type="text" value="CA" placeholder="CA" maxlength="2" style="text-transform:uppercase">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">Country</span>
+            <input class="field-input" type="text" placeholder="">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">ZIP or foreign postal code</span>
+            <input class="field-input" type="text" placeholder="95814">
+          </div>
+        </div>
+
+        <!-- PAYER'S TIN / RECIPIENT'S TIN -->
+        <div class="field-row two-col thick">
+          <div class="field-cell">
+            <span class="field-label">PAYER'S TIN</span>
+            <input class="field-input" type="text" placeholder="XX-XXXXXXX" maxlength="11">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">RECIPIENT'S TIN</span>
+            <input class="field-input recipient-field" type="text" placeholder="XXX-XX-XXXX" maxlength="11">
+          </div>
+        </div>
+
+        <!-- RECIPIENT'S name -->
+        <div class="field-row">
+          <div class="field-cell">
+            <span class="field-label">RECIPIENT'S name</span>
+            <input class="field-input recipient-field" type="text" placeholder="Cleaner's full legal name">
+          </div>
+        </div>
+
+        <!-- Recipient street / apt -->
+        <div class="field-row addr-apt">
+          <div class="field-cell">
+            <span class="field-label">Street address</span>
+            <input class="field-input recipient-field" type="text" placeholder="Recipient's street address">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">Apt. no.</span>
+            <input class="field-input recipient-field" type="text" placeholder="">
+          </div>
+        </div>
+
+        <!-- Recipient city -->
+        <div class="field-row">
+          <div class="field-cell">
+            <span class="field-label">City or town</span>
+            <input class="field-input recipient-field" type="text" placeholder="Recipient's city">
+          </div>
+        </div>
+
+        <!-- Recipient state / country / zip -->
+        <div class="field-row three-col thick">
+          <div class="field-cell">
+            <span class="field-label">State or province</span>
+            <input class="field-input recipient-field" type="text" placeholder="CA" maxlength="2" style="text-transform:uppercase">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">Country</span>
+            <input class="field-input recipient-field" type="text" placeholder="">
+          </div>
+          <div class="field-cell">
+            <span class="field-label">ZIP or foreign postal code</span>
+            <input class="field-input recipient-field" type="text" placeholder="XXXXX">
+          </div>
+        </div>
+
+        <!-- Account number / 2nd TIN -->
+        <div class="field-row two-col">
+          <div class="field-cell">
+            <span class="field-label">Account number (see instructions)</span>
+            <input class="field-input" type="text" placeholder="">
+          </div>
+          <div class="field-cell" style="flex-direction:row; align-items:center; gap:6px;">
+            <input type="checkbox" style="width:14px;height:14px;">
+            <span class="field-label">2nd TIN not.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- RIGHT COLUMN ---- -->
+      <div class="right-col">
+        <!-- Title block -->
+        <div class="right-header right-side-label">
+          <div>
+            <div class="form-rev">Form <b style="font-size:16px">1099-NEC</b></div>
+            <div class="form-rev">(Rev. December 2026)</div>
+          </div>
+          <div class="form-subtitle" style="margin-top:4px;">Nonemployee Compensation</div>
+        </div>
+
+        <!-- Calendar year -->
+        <div class="calendar-year">
+          <span class="field-label">For calendar year</span>
+          <input class="field-input" type="text" placeholder="2025" maxlength="4" style="width:60px;text-align:center;font-size:16px;font-weight:800;border-bottom:2px solid #000;">
+        </div>
+
+        <!-- Copy label area -->
+        <div class="box-row" style="min-height:28px; position:relative;">
+          <div class="copy-label">
+            Copy B
+            <small>For Recipient</small>
+          </div>
+        </div>
+
+        <!-- 1a Nonemployee compensation -->
+        <div class="box-row">
+          <span class="box-label"><b>1a</b> Nonemployee compensation</span>
+          <div class="box-input-wrap">
+            <span class="dollar">$</span>
+            <input class="box-input" type="text" placeholder="0.00">
+          </div>
+        </div>
+
+        <!-- 1b Cash tips / 1c TTOC -->
+        <div class="box-split">
+          <div class="box-cell" style="grid-column: span 2;">
+            <span class="box-label"><b>1b</b> Cash tips</span>
+            <div class="box-input-wrap">
+              <span class="dollar">$</span>
+              <input class="box-input" type="text" placeholder="">
+            </div>
+          </div>
+          <div class="box-cell">
+            <span class="box-label"><b>1c</b> TTOC</span>
+            <input class="box-input" type="text" placeholder="" style="font-size:11px;">
+          </div>
+        </div>
+
+        <!-- 1d Overtime compensation -->
+        <div class="box-row">
+          <span class="box-label"><b>1d</b> Overtime compensation</span>
+          <div class="box-input-wrap">
+            <span class="dollar">$</span>
+            <input class="box-input" type="text" placeholder="">
+          </div>
+        </div>
+
+        <!-- 2 Direct sales checkbox -->
+        <div class="box-row checkbox-row">
+          <span class="box-label"><b>2</b> Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale</span>
+          <input type="checkbox">
+        </div>
+
+        <!-- 3 Excess golden parachute -->
+        <div class="box-row">
+          <span class="box-label"><b>3</b> Excess golden parachute payments</span>
+          <div class="box-input-wrap">
+            <span class="dollar">$</span>
+            <input class="box-input" type="text" placeholder="">
+          </div>
+        </div>
+
+        <!-- 4 Federal income tax withheld -->
+        <div class="box-row thick">
+          <span class="box-label"><b>4</b> Federal income tax withheld</span>
+          <div class="box-input-wrap">
+            <span class="dollar">$</span>
+            <input class="box-input" type="text" placeholder="0.00">
+          </div>
+        </div>
+
+        <!-- 5 / 6 / 7 bottom row -->
+        <div class="box-split" style="border-bottom:none; flex:1;">
+          <div class="box-cell">
+            <span class="box-label"><b>5</b> State tax withheld</span>
+            <div class="box-input-wrap">
+              <span class="dollar">$</span>
+              <input class="box-input" type="text" placeholder="">
+            </div>
+            <div class="box-input-wrap" style="border-top:1px solid #ddd; margin-top:2px; padding-top:2px;">
+              <span class="dollar">$</span>
+              <input class="box-input" type="text" placeholder="">
+            </div>
+          </div>
+          <div class="box-cell">
+            <span class="box-label"><b>6</b> State/Payer's state no.</span>
+            <input class="box-input" type="text" placeholder="" style="font-size:11px;">
+            <input class="box-input" type="text" placeholder="" style="font-size:11px; border-top:1px solid #ddd; margin-top:2px; padding-top:2px;">
+          </div>
+          <div class="box-cell">
+            <span class="box-label"><b>7</b> State income</span>
+            <div class="box-input-wrap">
+              <span class="dollar">$</span>
+              <input class="box-input" type="text" placeholder="">
+            </div>
+            <div class="box-input-wrap" style="border-top:1px solid #ddd; margin-top:2px; padding-top:2px;">
+              <span class="dollar">$</span>
+              <input class="box-input" type="text" placeholder="">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="form-footer">
+      <span>Form <b>1099-NEC</b> (Rev. 12-2026)</span>
+      <span>(keep for your records)</span>
+      <span>www.irs.gov/Form1099NEC</span>
+      <span>Department of the Treasury - Internal Revenue Service</span>
+    </div>
+  </div>
+</div>
+
+<div class="info-section no-print" style="margin-top: 8px;">
+  <div class="info-card" style="background:#f8fafc;">
+    <h3 style="font-size:12px; color:#64748b;">Quick notes</h3>
+    <p style="font-size:12px;">This is <b>Copy B</b> (for the recipient/cleaner). You need to give each cleaner their copy if you paid them $600+ during the year. Fill it out here, then hit <b>Print</b> to get a clean printout. The IRS copy (Copy A) must be filed electronically via <a href="https://www.irs.gov/filing/e-file-forms-1099-with-iris" target="_blank" style="color:#3b82f6;">IRS IRIS</a> &mdash; do not mail a self-printed Copy A.</p>
+  </div>
+</div>
+
+<script>
+function clearRecipient() {
+  document.querySelectorAll('.recipient-field').forEach(function(el) {
+    el.value = '';
+  });
+}
+</script>
+
+</body>
+</html>
